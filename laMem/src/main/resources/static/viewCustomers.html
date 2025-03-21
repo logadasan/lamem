@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View All Customers</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    .header {
+      background: #2a9d8f;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2a9d8f;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.8rem;
+    }
+
+    th {
+      background-color: #264653;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>LaMem Events Dashboard</h1>
+  </div>
+
+  <div class="container">
+    <h2>View All Customers</h2>
+    <table id="customersTable">
+      <thead>
+        <tr>
+          <th>Customer ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Associated Events</th>
+          <th>Customizations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Customer details will be dynamically inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 LaMem Events. All Rights Reserved.</p>
+  </div>
+
+  <script>
+    // Fetch customer data from the backend API
+    fetch('http://localhost:8080/api/customers')
+      .then(response => response.json())
+      .then(customers => {
+        const customersTable = document.getElementById('customersTable').querySelector('tbody');
+
+        customers.forEach(customer => {
+          const row = document.createElement('tr');
+
+          // Build associated events and customizations display
+          const events = customer.events
+            ? customer.events.map(event => `${event.eventType} (${event.eventDate})`).join('<br>')
+            : 'No events';
+          const customizations = customer.events
+            ? customer.events
+                .flatMap(event => event.customizations || [])
+                .map(c => c.serviceType)
+                .join('<br>') || 'No customizations'
+            : 'No customizations';
+
+          // Populate row with customer details
+          row.innerHTML = `
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.email || 'N/A'}</td>
+            <td>${customer.contactNumber || 'N/A'}</td>
+            <td>${events}</td>
+            <td>${customizations}</td>
+          `;
+
+          customersTable.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching customers:', error);
+        const customersTable = document.getElementById('customersTable').querySelector('tbody');
+        customersTable.innerHTML = '<tr><td colspan="6">Error fetching customer data.</td></tr>';
+      });
+  </script>
+</body>
+</html>
+ 

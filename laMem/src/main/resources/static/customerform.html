@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaMem Events - Customer Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Basic CSS for visual design */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>LaMem Events</h1>
+  </div>
+
+  <div class="form-container">
+    <h2>Customer Registration</h2>
+    <form id="customerForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" id="contactNumber" name="contactNumber" placeholder="Enter your contact number" required>
+      </div>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 LaMem Events. All Rights Reserved.</p>
+  </div>
+
+  <script>
+    // JavaScript to send form data as JSON to the backend
+    const form = document.getElementById('customerForm');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        contactNumber: form.contactNumber.value,
+      };
+
+      try {
+        const response = await fetch('http://localhost:8080/api/customers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          alert('Customer registered successfully!');
+          form.reset();
+        } else {
+          const error = await response.text();
+          alert(`Error: ${error}`);
+        }
+      } catch (error) {
+        alert('Failed to submit the form. Please try again later.');
+      }
+    });
+  </script>
+</body>
+</html>

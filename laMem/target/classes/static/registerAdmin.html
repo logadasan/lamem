@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Admin - LaMem Events</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to External CSS -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, #f7f1e3, #d4cfc4);
+            color: #2c2c2c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fefae0;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            width: 380px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+        }
+
+        h2 {
+            color: #1d3557;
+            font-family: 'Garamond', serif;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 0.5rem 0 0.3rem;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #1d3557;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #457b9d;
+            outline: none;
+            box-shadow: 0 0 5px rgba(69, 123, 157, 0.3);
+        }
+
+        button {
+            background: #457b9d;
+            color: white;
+            font-size: 1rem;
+            padding: 0.8rem;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #1d3557;
+            transform: scale(1.05);
+        }
+
+        p {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        a {
+            color: #457b9d;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #1d3557;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Registration</h2>
+        <form action="/registerAdmin" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter Username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+
+            <button type="submit">Register</button>
+        </form>
+        <p>Already an admin? 
+    </div>
+</body>
+</html>

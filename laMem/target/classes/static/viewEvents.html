@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View All Events</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background: #f4f4f4;
+	color: #333;
+}
+
+.header {
+	background: #1d3557;
+	color: white;
+	text-align: center;
+	padding: 1rem 0;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+	margin: 0;
+	font-size: 2rem;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+	text-align: center;
+	color: #1d3557;
+	margin-bottom: 1.5rem;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid #ddd;
+}
+
+th, td {
+	text-align: left;
+	padding: 0.8rem;
+}
+
+th {
+	background-color: #457b9d;
+	color: white;
+}
+
+tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.footer {
+	text-align: center;
+	margin-top: 2rem;
+	color: #555;
+	font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<h1>LaMem Events Dashboard</h1>
+	</div>
+
+	<div class="container">
+		<h2>View All Events</h2>
+		<table id="eventsTable">
+			<thead>
+				<tr>
+					<th>Event ID</th>
+					<th>Event Type</th>
+					<th>Event Date</th>
+					<th>Event Time</th>
+					<th>Location</th>
+					<th>Theme</th>
+					<th>Description</th>
+					<th>Customizations</th>
+					<th>Customer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Event details will be dynamically inserted here -->
+			</tbody>
+		</table>
+	</div>
+
+	<div class="footer">
+		<p>&copy; 2025 LaMem Events. All Rights Reserved.</p>
+	</div>
+
+	<script>
+    // Fetch event data from the backend API
+   fetch('http://localhost:8080/api/events')
+  .then(response => response.json())
+  .then(events => {
+    console.log("Events data received:", events); // Debugging line
+
+    const eventsTable = document.getElementById('eventsTable').querySelector('tbody');
+    eventsTable.innerHTML = "";
+
+    events.forEach(event => {
+      console.log("Processing event:", event); // Debugging line
+      let customizationList = event.customizations?.map(c => c.serviceType).join(', ') || 'No customizations';
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${event.id}</td>
+        <td>${event.eventType}</td>
+        <td>${event.eventDate}</td>
+        <td>${event.eventTime}</td>
+        <td>${event.location}</td>
+        <td>${event.theme || 'N/A'}</td>
+        <td>${event.description || 'N/A'}</td>
+        <td>${customizationList}</td>
+        <td>${event.customer ? event.customer.name + ' (' + event.customer.contactNumber + ')' : 'No customer'}</td>
+      `;
+
+      eventsTable.appendChild(row);
+    });
+  })
+  .catch(error => console.error('Error fetching events:', error));
+
+  </script>
+</body>
+</html>

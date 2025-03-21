@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaMem Events Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Greek Theme Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #f7f1e3, #d4cfc4);
+      color: #2c2c2c;
+    }
+
+    .header {
+      background: #1d3557;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+    }
+
+    .navbar {
+      background: #457b9d;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #a8dadc;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fefae0;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      font-family: 'Garamond', serif;
+      color: #1d3557;
+      margin-bottom: 1.5rem;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .links a {
+      display: block;
+      width: 80%;
+      text-decoration: none;
+      background: #457b9d;
+      color: white;
+      text-align: center;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .links a:hover {
+      background: #1d3557;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>LaMem Events Dashboard</h1>
+  </div>
+
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <div class="container">
+    <h2>Welcome to LaMem Events</h2>
+    <p>Select a page to manage your events and customizations:</p>
+
+    <div class="links">
+      <a href="/eventform.html">Create Event</a>
+      <a href="/customization.html">Customize Event</a>
+      <a href="/customerform.html">Add Customer</a>
+      <a href="/viewEvents.html">View All Events</a>
+      <a href="/viewCustomers.html">View All Customers</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 LaMem Events. All Rights Reserved.</p>
+  </div>
+</body>
+</html>
